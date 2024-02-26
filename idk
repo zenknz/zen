@@ -1,0 +1,56 @@
+if game.PlaceId == 2753915549 or game.PlaceId == 4442272183 or game.PlaceId == 7449423635 then
+    game.StarterGui:SetCore("SendNotification", {
+        Icon = "rbxassetid://9152775759";
+        Title = "PROXO", 
+        Text = "Welcome PROXO!"
+    })
+
+    wait(1)
+
+    game.StarterGui:SetCore("SendNotification", {
+        Icon = "rbxassetid://9152775759";
+        Title = "PROXO    ", 
+        Text = "Loading Ui..."
+    })
+
+    wait(10)
+
+    -- Existing code goes here
+    local RigC = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework) 
+    local VirtualUser = game:GetService('VirtualUser')
+    local kkii = require(game.ReplicatedStorage.Util.CameraShaker)
+
+    spawn(function()
+        -- Existing spawn function
+        game:GetService('RunService').Heartbeat:Connect(function()
+            if _G.FastAtttk then
+                pcall(function()
+                    RigC.activeController.timeToNextAttack = 0
+                    RigC.activeController.attacking = false
+                    RigC.activeController.blocking = false
+                    RigC.activeController.timeToNextAttack = 0
+                    RigC.activeController.timeToNextBlock = 0
+                    RigC.activeController.increment = 3
+                    RigC.activeController.hitboxMagnitude = 100
+                    game.Players.LocalPlayer.Character.Stun.Value = 0
+                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+
+                    VirtualUser:CaptureController()
+                    VirtualUser:Button1Down(Vector2.new(1280, 672))
+                    kkii:Stop()
+                end)
+            end
+        end)
+    end)
+
+    spawn(function()
+        -- Existing spawn function
+        for i = 1, 999999999999999 do
+            game:GetService('RunService').Heartbeat:Wait()
+            if _G.FastAtttk then
+                VirtualUser:CaptureController()
+                VirtualUser:Button1Down(Vector2.new(1280, 672))
+            end
+        end
+    end)
+end
